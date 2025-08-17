@@ -11,20 +11,22 @@ const UsePropina = () => {
     const calcularPropina = () => {
         if (subCuenta === "") {
             alerta("Debe ingresar el total de la cuenta ");
-        } else if (selectPropina === '0') {
+        } else if (selectPropina === "") {
             alerta("Debe seleccionar el porcentaje de la propina ");
         } else {
-            let numSelecPropina = selectPropina === '1' ? .1 : selectPropina === '2' ? .15 : selectPropina === '3' ? .2 : 0;
-            let propinaCa = Number(subCuenta) * Number(numSelecPropina);
-            setPropina(propinaCa); 
-            let totalPago = propinaCa + numSelecPropina; 
-            setTotalPagar(totalPago); 
-            
+           let numSelecPropina = selectPropina === '10' ? .1 : selectPropina === '15' ? .15 : selectPropina === '20' ? .2 : 0;
+            let propinaCa = Number(subCuenta) * numSelecPropina;
+            setPropina(propinaCa.toFixed(2)); 
+            let totalPago = propinaCa + Number(subCuenta); 
+            setTotalPagar(totalPago.toFixed(2)); 
         }
     }
 
-    const limpiar = () => {
-
+    const Limpiar = () => {
+        setSubCuenta(''); 
+        setSelectPropina(''); 
+        setPropina(''); 
+        setTotalPagar(''); 
     }
 
     const alerta = (mensaje) => {
@@ -32,6 +34,19 @@ const UsePropina = () => {
             title: mensaje,
             icon: "warning"
         });
+    }
+
+    return{
+        subCuenta,
+        setSubCuenta, 
+        selectPropina,
+        setSelectPropina, 
+        propina, 
+        setPropina, 
+        totalPagar,
+        setTotalPagar,
+        calcularPropina,
+        Limpiar
     }
 
 }
